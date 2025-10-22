@@ -1,98 +1,116 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## API
+Projeto BackEnd
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Atenção
+Utilizei o node `v22.20.0` e o Docker para rodar o Banco de Dados, então recomendo que faça o mesmo.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Configurações iniciais - Siga passo a passo.
+1. Primeiro acesse a pasta do projeto;
 
-## Description
+2. Caso não tenha o Node em sua máquina, siga os passos abaixo:
+### Instalação do Node.js
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+#### Windows
+- Acesse o site oficial: [https://nodejs.org](https://nodejs.org)
+- Baixe o instalador LTS (recomendado) ou a versão específica v22.20.0
+- Execute o instalador e siga as instruções na tela
+- Verifique a instalação executando `node --version` no terminal
 
-## Project setup
+#### macOS
+- **Usando Homebrew** (recomendado):
+  ```bash
+  brew install node@20
+  ```
+- **Ou baixe diretamente**:
+  - Acesse [https://nodejs.org](https://nodejs.org)
+  - Baixe o instalador para macOS
+  - Execute o instalador e siga as instruções
 
+#### Linux (Ubuntu/Debian)
 ```bash
-$ npm install
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 
-## Compile and run the project
-
+#### Verificação
+Após a instalação, verifique se o Node.js foi instalado corretamente:
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+node --version
+npm --version
 ```
 
-## Run tests
+3. (Opcional) Instale o docker para "subir" o container que irá rodar o Banco de Dados PostgreSQL:
 
+> obs: Caso não queira utilizar o Docker, terá que conter o PostgreSQL em sua máquina local e realizar as configurações necessárias, principalmente na variável de ambiente `DATABASE_URL` que é informado no passo 6.
+### Instalação do Docker
+
+#### Windows
+- Acesse o site oficial: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+- Baixe o Docker Desktop para Windows
+- Execute o instalador e siga as instruções na tela
+- Reinicie o computador se solicitado
+- Verifique a instalação executando `docker --version` no terminal
+
+#### macOS
+- Acesse o site oficial: [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)
+- Baixe o Docker Desktop para Mac (escolha entre Intel ou Apple Silicon)
+- Abra o arquivo `.dmg` e arraste o Docker para a pasta Applications
+- Inicie o Docker Desktop a partir do Launchpad
+- Verifique a instalação executando `docker --version` no terminal
+
+#### Linux (Ubuntu/Debian)
 ```bash
-# unit tests
-$ npm run test
+# Atualize os pacotes
+sudo apt-get update
 
-# e2e tests
-$ npm run test:e2e
+# Instale dependências
+sudo apt-get install ca-certificates curl gnupg lsb-release
 
-# test coverage
-$ npm run test:cov
+# Adicione a chave GPG oficial do Docker
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+# Configure o repositório
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Instale o Docker Engine
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+# Adicione seu usuário ao grupo docker (opcional, para executar sem sudo)
+sudo usermod -aG docker $USER
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+#### Verificação
+Após a instalação, verifique se o Docker foi instalado corretamente:
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+docker --version
+docker compose version
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+4. Instale o CLI do [Nest](https://docs.nestjs.com) na sua máquina:
+- `npm i -g @nestjs/cli`
 
-## Resources
+5. Na raiz do projeto **e utilizando o Node na versão v22.20.0** execute: `npm install`;
 
-Check out a few resources that may come in handy when working with NestJS:
+6. Crie um arquivo `.env` na raiz do projeto, copie o conteúdo contido em `.env.example` e cole em `.env` e configure as variáveis de ambiente para o seu caso de teste local.
+- `JWT_SECRET`: se quiser pode utilizar o mesmo token, não têm problema.
+- `DATABASE_URL`: será a configuração do seu banco de dados rodando em sua máquina, nesse caso, o PostgreSQL.
+- - Caso utilize o Docker e irá rodar o container com as instruções contidas em `docker-compose.yml`, então você pode seguir exatamente essas informações (a não ser que tenha algo rodando em sua máquina que conflite com as configurações, ai terá que ajustar manualmente):
+- - `DATABASE_URL="postgresql://admin:admin@localhost:5432/meudb?schema=public"`
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+7. Após instalar as dependências suba o container Docker e rode as migrações de desenvolvimento do prisma:
+- Iniciar o container do PostgreSQL
+- - `docker-compose up -d`
 
-## Support
+- Verificar se está rodando
+- - `docker ps`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Rodar as migrations do Prisma
+- - `npx prisma migrate dev`
 
-## Stay in touch
+- Abrir o Prisma Studio (interface visual)
+- - `npx prisma studio`
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+8. Se tudo ocorrer bem, para rodar o projeto execute:
+- `npm run start:dev`
