@@ -1,17 +1,21 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersRepository } from 'src/shared/database/repositories/users.repositories';
 
 @Injectable()
 export class UsersService {
   constructor(private readonly usersRepo: UsersRepository) {}
 
-  getUserById(userId: string) {
-    return this.usersRepo.findUnique({
+  async getUserById(userId: string) {
+    const user = await this.usersRepo.findUnique({
       where: { id: userId },
       select: {
         name: true,
         email: true,
       },
     });
+
+    if (!user) throw new UnauthorizedException('Usuário não encontrado!');
+
+    return { me: user };
   }
 }

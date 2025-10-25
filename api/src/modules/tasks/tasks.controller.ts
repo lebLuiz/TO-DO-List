@@ -14,6 +14,7 @@ import { TasksService } from './services/tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { ActiveUserId } from 'src/shared/decorators/ActiveUserId';
+import { UpdateTaskCheckDto } from './dto/update-task-check.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -44,6 +45,15 @@ export class TasksController {
     @Body() updateTaskDto: UpdateTaskDto,
   ) {
     return this.tasksService.update(userId, taskId, updateTaskDto);
+  }
+
+  @Put(':taskId/checked')
+  updateChecked(
+    @ActiveUserId() userId: string,
+    @Param('taskId', ParseUUIDPipe) taskId: string,
+    @Body() updateTaskCheckDto: UpdateTaskCheckDto,
+  ) {
+    return this.tasksService.updateChecked(userId, taskId, updateTaskCheckDto);
   }
 
   @Delete(':taskId')

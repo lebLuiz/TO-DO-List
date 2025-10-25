@@ -7,7 +7,5 @@ export class UpdateTaskDto {
   title: string;
 
   @IsString({ message: 'A descrição precisa ser uma string' })
-  @IsNotEmpty({ message: 'A descrição não pode estar vázia' })
-  @MinLength(5, { message: 'A descrição precisa ter no mínimo 5 caracteres' })
-  description: string;
+  description: string | null;
 }

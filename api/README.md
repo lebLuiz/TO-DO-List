@@ -114,3 +114,5 @@ docker compose version
 
 8. Se tudo ocorrer bem, para rodar o projeto execute:
 - `npm run start:dev`
+
+9. Caso dê algum problema de Error com Status 500 relacionado à conexão do prisma, tente rodar `npx prisma migrate reset` e execute novamente o projeto(`npm run start:dev`)

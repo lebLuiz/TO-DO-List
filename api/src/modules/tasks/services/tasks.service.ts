@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { TasksRepository } from 'src/shared/database/repositories/tasks.repositories';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
+import { UpdateTaskCheckDto } from '../dto/update-task-check.dto';
 import { ValidateTaskOwnershipService } from './validate-task-ownership.service';
 
 @Injectable()
@@ -30,6 +31,7 @@ export class TasksService {
         id: true,
         title: true,
         description: true,
+        checked: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -51,6 +53,7 @@ export class TasksService {
         id: true,
         title: true,
         description: true,
+        checked: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -71,6 +74,24 @@ export class TasksService {
       data: {
         title,
         description,
+      },
+    });
+  }
+
+  async updateChecked(
+    userId: string,
+    taskId: string,
+    updateTaskCheckDto: UpdateTaskCheckDto,
+  ) {
+    await this.validateTaskOwnershipService.validate(userId, taskId);
+
+    const { checked } = updateTaskCheckDto;
+    return this.tasksRepo.update({
+      where: {
+        id: taskId,
+      },
+      data: {
+        checked,
       },
     });
   }
