@@ -1,54 +1,47 @@
-# app
+## APP
+Projeto FrontEnd
 
-This template should help get you started developing with Vue 3 in Vite.
+## Atenção
+Utilizei o node `v22.20.0` para executar o projeto, então recomendo que faça o mesmo.
 
-## Recommended IDE Setup
+## Configurações iniciais - Siga passo a passo.
+1. Primeiro acesse a pasta do projeto;
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+2. Caso não tenha o Node em sua máquina, siga os passos abaixo:
+### Instalação do Node.js
 
-## Recommended Browser Setup
+#### Windows
+- Acesse o site oficial: [https://nodejs.org](https://nodejs.org)
+- Baixe o instalador LTS (recomendado) ou a versão específica v22.20.0
+- Execute o instalador e siga as instruções na tela
+- Verifique a instalação executando `node --version` no terminal
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+#### macOS
+- **Usando Homebrew** (recomendado):
+  ```bash
+  brew install node@20
+  ```
+- **Ou baixe diretamente**:
+  - Acesse [https://nodejs.org](https://nodejs.org)
+  - Baixe o instalador para macOS
+  - Execute o instalador e siga as instruções
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+#### Linux (Ubuntu/Debian)
+```bash
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+#### Verificação
+Após a instalação, verifique se o Node.js foi instalado corretamente:
+```bash
+node --version
+npm --version
 ```
 
-### Type-Check, Compile and Minify for Production
+3. Na raiz do projeto **e utilizando o Node na versão v22.20.0** execute: `npm install`;
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+4. Se tudo ocorrer bem, para rodar o projeto execute:
+- `npm run dev`
+- - Na sequência, abra o navegador em: `http://localhost:5173`
+- - E pronto, projeto rodando! :D
